@@ -1,7 +1,10 @@
+##import boto library
 import boto.ses
 
+##add aws keys
 AWS_ACCESS_KEY = 'YOUR-ACCESS-KEY-HERE'
 AWS_SECRET_KEY = 'YOUR-SECRET-KEY-HERE'
+
 
 class Email(object):
     def __init__(self, to, subject):
@@ -30,6 +33,7 @@ class Email(object):
             self._format = 'text'
             body = self._text
 
+##uses boto to connect AWS API REGION using credentials
         connection = boto.ses.connect_to_region(
             'us-east-1',
             aws_access_key_id='YOUR-ACCESS-KEY-HERE',
@@ -46,6 +50,7 @@ class Email(object):
             html_body=self._html
         )
 
+##sends the mail to receiver
 email = Email(to='receiver@example.com', subject='Here comes the subject!')
 email.text('This is the text of the body. Surprise!')
 email.html('<html><body>This is the text of the body. <strong>Surprise!</strong></body></html>')  # Optional
